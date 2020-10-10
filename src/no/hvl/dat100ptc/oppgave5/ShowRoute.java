@@ -55,21 +55,38 @@ public class ShowRoute extends EasyGraphics {
 	
 		double ystep;
 		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 
-		// TODO - SLUTT
-		
+		ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;
 	}
 
 	public void showRouteMap(int ybase) {
-
-		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double x = xstep();	
+		double y = ystep();
+		int[] xTab = new int[gpspoints.length];
+		int[] yTab = new int[gpspoints.length];
+		int minsteX = (int)( GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints))* x);
+		int størsteY = (int)( GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints))* y);
+		setColor(124,252,0);
 		
-		// TODO - SLUTT
+		for(int v = 0; v < gpspoints.length; v++) {
+			double breddegrad = gpspoints[v].getLatitude();
+			double lengdegrad = gpspoints[v].getLongitude();
+			int a = (int)((lengdegrad * x));
+			int b = (int)((breddegrad * y));
+			xTab[v] = a;
+			yTab[v] = b;
+			fillCircle(a - minsteX  + MARGIN, størsteY - b + MARGIN, 4);	
+			
+		}
+		for(int v = 1; v < gpspoints.length; v++) {
+			drawLine(xTab[v-1] - minsteX + MARGIN, størsteY - yTab[v-1] + MARGIN, xTab[v] - minsteX + MARGIN, størsteY - yTab[v] + MARGIN );
+		}
+	
 	}
 
 	public void showStatistics() {
@@ -79,11 +96,18 @@ public class ShowRoute extends EasyGraphics {
 		setColor(0,0,0);
 		setFont("Courier",12);
 		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT;
+	    int y = TEXTDISTANCE;	
+		drawString("Total Time     : " + GPSUtils.formatTime(gpscomputer.totalTime()) + " ", 25, y);
+		y += TEXTDISTANCE;
+		drawString("Total distance : " + GPSUtils.formatDouble(gpscomputer.totalDistance()/1000) + " km ", 25, y);
+		y += TEXTDISTANCE;
+		drawString("Total elevation: " + GPSUtils.formatDouble(gpscomputer.totalElevation())+ " m ", 25, y);
+		y += TEXTDISTANCE;
+		drawString("Max speed      : " + GPSUtils.formatDouble(gpscomputer.maxSpeed())+ " km/t ", 25, y);
+		y += TEXTDISTANCE;
+		drawString("Average speed  : " + GPSUtils.formatDouble(gpscomputer.averageSpeed())+ " km/t ", 25, y);
+		y += TEXTDISTANCE;
+		drawString("Energy         : " + GPSUtils.formatDouble(gpscomputer.totalKcal(80))+ " kcal ", 25, y);
 	}
 
 }

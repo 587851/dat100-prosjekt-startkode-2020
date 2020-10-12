@@ -8,6 +8,9 @@ public class GPSData {
 	private GPSPoint[] gpspoints;
 	protected int antall = 0;
 
+	
+	/*Konstruktør som skal opprette ein tabell av GPS punkter med størrelsen gitt ved parameteren n 
+	  og antall er 0(Første element skal inn på posisjon 0*/
 	public GPSData(int n) {
          antall = 0;
          gpspoints	 = new GPSPoint[n];
@@ -17,6 +20,8 @@ public class GPSData {
 		return this.gpspoints;
 	}
 	
+	
+	//Setter inn et GPS punkt i gpspoints-tabellen hvis det er plass
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
@@ -29,6 +34,7 @@ public class GPSData {
 		return inserted;
 	}
 
+	//Metoden konverterer data, oppretter eit nytt GPSpoint-objekt og setter det inn i ein tabell.
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
 		GPSPoint gpspoint;
@@ -36,7 +42,10 @@ public class GPSData {
 		boolean instert = insertGPS(gpspoint);
 		return instert;
 	}
-
+	
+	
+	
+    //Metode for å skrive ut all data i ein gpspoints-tabell
 	public void print() {
 
 		System.out.println("====== Konvertert GPS Data - START ======");

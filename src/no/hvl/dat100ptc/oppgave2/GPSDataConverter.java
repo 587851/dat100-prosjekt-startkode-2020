@@ -13,6 +13,8 @@ public class GPSDataConverter {
 	
 	private static int TIME_STARTINDEX = 11; // startindex for tidspunkt i timestr
 
+	
+	//Konverterer tidsdata "2017-08-13T08:52:26.000Z" til sekunder.
 	public static int toSeconds(String timestr) {
 		
 		int secs;
@@ -25,7 +27,10 @@ public class GPSDataConverter {
 		secs = hr*60*60 + min*60 + sec;
 		return secs;
 	}
-
+	
+	
+    /*Metode som tar String-representasjoner av, tid, lengdegrader, breddegrader og høyde, konverterer disse og 
+	oppretter et GPSpoint-objekt med de tilsvarende data*/
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
 		GPSPoint gpspoint;

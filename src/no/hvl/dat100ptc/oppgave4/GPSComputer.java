@@ -36,7 +36,8 @@ public class GPSComputer {
 		return distance;
 	}
 
-	// beregn totale høydemeter (i meter)
+	
+	//Metode som beregner den totale høydemeter (i meter)
 	public double totalElevation() {
 
 		double elevation = 0;
@@ -51,7 +52,9 @@ public class GPSComputer {
 		return elevation;
 	}
 
-	// beregn total tiden for hele turen (i sekunder)
+	
+	
+	// Metode som beregner den totale tiden for hele turen (i sekunder)
 	public int totalTime() {
 
 		int totalTid = 0;
@@ -64,7 +67,9 @@ public class GPSComputer {
 		return totalTid;
 	}
 		
-	// beregn gjennomsnitshastighets mellom hver av gps punktene
+	
+	
+	//Metode som beregner gjennomsnitshastigheten mellom hver av gps punktene
 
 	public double[] speeds() {
 		
@@ -76,6 +81,8 @@ public class GPSComputer {
         return gjennomsnitt;
 	}
 	
+	
+	//Metode som finner den største hastigheten mellom to punkt på ruten
 	public double maxSpeed() {
 		
 		double maxspeed = 0;
@@ -89,24 +96,26 @@ public class GPSComputer {
 		return maxspeed;
 	}
 
+	
+	//Metode som beregner gjennomsnitthastigheten for hele ruten
 	public double averageSpeed() {
 
 		double sumFart = 0;
-		double antall = 0;
 		double sumTid = 0;
 		
+		//Finner tiden mellom to punkt og setter de inn i en tabell
 		int[] tabellTid = new int[gpspoints.length-1];	
 		for(int v = 1; v < gpspoints.length;v++) {
 			int tid1 = gpspoints[v-1].getTime();
 			int tid2 = gpspoints[v].getTime();
 			tabellTid[v-1] = tid2-tid1;
 		}
-			
+		
 		double []speed = speeds();
+		//Finner summen av tidene og summen av fartene
 		for(int v = 0; v<speed.length; v++) {
 			sumFart += speed[v] * tabellTid[v];
 			sumTid += tabellTid[v];
-			antall++;
 			}		
 		double average = sumFart / sumTid;	
 		return average;
@@ -121,10 +130,13 @@ public class GPSComputer {
 	 * bicycling, >20 mph, racing, not drafting 16.0
 	 */
 
+	
+	
+	
 	// conversion factor m/s to miles per hour
 	public static double MS = 2.236936;
-
-	// beregn kcal gitt weight og tid der kjores med en gitt hastighet
+    
+	// Metode som beregner kcal som blir forbrent ved hjelp av parametrene weight, secs og speed
 	public double kcal(double weight, int secs, double speed) {
 
 		double kcal = 0;
@@ -158,10 +170,14 @@ public class GPSComputer {
 		
 	}
 
+	
+	//Metode som beregner den totale energi-mengden som blir forbrent på ruten
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0 ;
 		
+		
+		//Finner tiden mellom to punkt og setter de inn i en tabell
 		int[] tabellTid = new int[gpspoints.length-1];	
 		for(int v = 1; v < gpspoints.length;v++) {
 			int tid1 = gpspoints[v-1].getTime();
@@ -179,6 +195,7 @@ public class GPSComputer {
 	
 	private static double WEIGHT = 80.0;
 	
+	//Metode som skriver ut statistikken som er beregnet av metodene i klassen
 	public void displayStatistics() {
 
 		System.out.println("==============================================");

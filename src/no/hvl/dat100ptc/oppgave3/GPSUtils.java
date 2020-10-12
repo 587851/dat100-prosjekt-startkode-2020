@@ -9,7 +9,9 @@ import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
 public class GPSUtils {
-
+	
+	
+    //Metode som finner største tall i ein double tabell med flyttall.
 	public static double findMax(double[] da) {
 
 		double max; 
@@ -25,6 +27,8 @@ public class GPSUtils {
 		return max;
 	}
 
+	
+	//Metode som finner minste tall i ein double tabell med flyttall.
 	public static double findMin(double[] da) {
 
 		double min; 
@@ -41,6 +45,8 @@ public class GPSUtils {
 
 	}
 
+	
+	//Metode som tar ein tabell med GPS punkter og returnerer ein double tabell med breddegradene fra GPS-punktene
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
 		double[] latitudes = new double[gpspoints.length];
@@ -51,6 +57,8 @@ public class GPSUtils {
 		return latitudes;
 	}
 
+	
+	//Metode som tar ein tabell med GPS punkter og returnerer ein double tabell med lengdegradene fra GPS-punktene
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
 		double[] longitudes = new double[gpspoints.length];
@@ -61,9 +69,11 @@ public class GPSUtils {
 		return longitudes;
 
 	}
-
+	
+	
 	private static int R = 6371000; // jordens radius
-
+    
+	//Metode som finner avstanden i meter mellom to GPS punkter
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		double d, a, c;
@@ -76,12 +86,16 @@ public class GPSUtils {
 		latitudeSum = latitude2 - latitude1;
 		longitudeSum = longitude2 - longitude1;
 		
+		//Haversine-formlen
 		a = Math.pow(Math.sin(latitudeSum/2), 2) + (Math.cos(latitude1) * Math.cos(latitude2) * Math.pow(Math.sin(longitudeSum/2), 2)); 
         c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         d = (R * c);
+        
         return d;
 	}
 
+	
+	//Metode som finner gjennomsnitthastigheten i km/t mellom to GPS punkt
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		double distance = distance(gpspoint1, gpspoint2);
@@ -95,6 +109,8 @@ public class GPSUtils {
 
 	}
 
+	
+	//Metode som returnerer ein streng på formatet hh:mm:ss, der parameteren secs er sekunder fra midnatt. 
 	public static String formatTime(int secs) {
         
 		int time = secs/3600;
@@ -123,8 +139,12 @@ public class GPSUtils {
 		
 
 	}
+	
+	
 	private static int TEXTWIDTH = 10;
 
+	/*Metode som runder av eit flyttall til to desimaler, setter resultatet inn i ein streng og fyller på med mellomrom slik at 
+	  lengden på strengen blir 10*/
 	public static String formatDouble(double d) {
 
 		String str = String.format(Locale.US, "%.2f", d);

@@ -39,7 +39,7 @@ public class ShowRoute extends EasyGraphics {
 		showStatistics();
 	}
 
-	// antall x-pixels per lengdegrad
+	// Metode som finner antall x-pixels mellom hver lengdegrad ved bruk av MAPXSIZE, og største og minste lengdegrad
 	public double xstep() {
 
 		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
@@ -50,7 +50,7 @@ public class ShowRoute extends EasyGraphics {
 		return xstep;
 	}
 
-	// antall y-pixels per breddegrad
+	// Metode som finner antall y-pixels mellom hver breddegrad ved bruk av MAPYSIZE, og største og minste breddegrad
 	public double ystep() {
 	
 		double ystep;
@@ -63,6 +63,9 @@ public class ShowRoute extends EasyGraphics {
 		return ystep;
 	}
 
+	
+	
+	//Metoden visualiserer ruten på et kart.
 	public void showRouteMap(int ybase) {
 		
 		
@@ -86,6 +89,9 @@ public class ShowRoute extends EasyGraphics {
 	
 	}
 
+	
+	
+	//Metode som viser statistikken fra sykkelturen i øverste venstre hjørne
 	public void showStatistics() {
 
 		int TEXTDISTANCE = 20;

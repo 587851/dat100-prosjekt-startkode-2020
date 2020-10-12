@@ -10,13 +10,16 @@ public class GPSPoint {
 	private double elevation;
 	
 		
+	// Konstruktør for GPSPoint
 	public GPSPoint(int time, double latitude, double longitude, double elevation) {
 		this.time = time;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.elevation = elevation;		
 	}
-
+	
+	
+    //Get og set metoder for time, latitude, longitude, elevation
 	public int getTime() {	
 		return time;
 	}
@@ -49,6 +52,8 @@ public class GPSPoint {
 		this.elevation = elevation;
 	}
 	
+	
+	//Metode som returnerer ein strengrepresentasjon av eit GPSpoint-objekt på formen 1 (2.0,3.0) 5.0\n
 	public String toString() {
 		return time + " (" + latitude + "," + longitude + ") " + elevation + "\n";
 	}

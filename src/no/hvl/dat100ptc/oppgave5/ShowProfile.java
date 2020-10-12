@@ -40,7 +40,9 @@ public class ShowProfile extends EasyGraphics {
 		// top margin + height of drawing area
 		showHeightProfile(MARGIN + MAXBARHEIGHT); 
 	}
-
+	
+	
+    //Metoden visualiserer høyde-kurven på de forskjellige punktene i den valgte ruten
 	public void showHeightProfile(int ybase) {
 
 		// ybase indicates the position on the y-axis where the columns should start

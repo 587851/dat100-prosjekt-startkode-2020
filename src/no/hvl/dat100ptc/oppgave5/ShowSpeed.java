@@ -41,6 +41,8 @@ public class ShowSpeed extends EasyGraphics {
 		showSpeedProfile(MARGIN + BARHEIGHT,N);
 	}
 	
+	
+	//Metoden visualiserer hastigheten som blei kjørt på ruten. Den grønne streken eg gjennomsnitthastigheten.
 	public void showSpeedProfile(int ybase, int N) {
 
 		// get segments speeds from the GPS computer object		

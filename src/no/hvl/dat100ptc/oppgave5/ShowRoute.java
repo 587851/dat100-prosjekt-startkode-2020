@@ -65,22 +65,19 @@ public class ShowRoute extends EasyGraphics {
 
 	public void showRouteMap(int ybase) {
 		
-		double x = xstep();	
-		double y = ystep();
+		
 		int[] xTab = new int[gpspoints.length];
 		int[] yTab = new int[gpspoints.length];
-		int minsteX = (int)( GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints))* x);
-		int størsteY = (int)( GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints))* y);
+		int minsteX = (int)( GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints))* xstep());
+		int størsteY = (int)( GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints))* ystep());
 		setColor(124,252,0);
 		
 		for(int v = 0; v < gpspoints.length; v++) {
 			double breddegrad = gpspoints[v].getLatitude();
 			double lengdegrad = gpspoints[v].getLongitude();
-			int a = (int)((lengdegrad * x));
-			int b = (int)((breddegrad * y));
-			xTab[v] = a;
-			yTab[v] = b;
-			fillCircle(a - minsteX  + MARGIN, størsteY - b + MARGIN, 4);	
+			xTab[v] = (int)(lengdegrad * xstep());
+			yTab[v] = (int)(breddegrad * ystep());
+			fillCircle(xTab[v] - minsteX  + MARGIN, størsteY - yTab[v] + MARGIN, 4);	
 			
 		}
 		for(int v = 1; v < gpspoints.length; v++) {

@@ -52,8 +52,8 @@ public class ShowSpeed extends EasyGraphics {
 		for(int v = 0; v < N; v++) {
 			int fart = (int)speeds[v];
 			
-			int y2 = ybase - fart;
-			drawLine(x, ybase, x, y2);
+			y = ybase - fart;
+			drawLine(x, ybase, x, y);
 		    x+=2;
 	}
 		setColor(124,252,0);

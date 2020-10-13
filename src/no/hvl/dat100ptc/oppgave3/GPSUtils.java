@@ -50,6 +50,7 @@ public class GPSUtils {
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
 		double[] latitudes = new double[gpspoints.length];
+		
 		for(int v = 0; v < gpspoints.length; v++) {
 			latitudes[v] = gpspoints[v].getLatitude();
 		}
@@ -79,16 +80,16 @@ public class GPSUtils {
 		double d, a, c;
 		double latitude1, longitude1, latitude2, longitude2, latitudeSum, longitudeSum;
         
-		latitude1 = Math.toRadians(gpspoint1.getLatitude());
-		latitude2 = Math.toRadians(gpspoint2.getLatitude());
-		longitude1 = Math.toRadians(gpspoint1.getLongitude());
-		longitude2 = Math.toRadians(gpspoint2.getLongitude());
+		latitude1 = toRadians(gpspoint1.getLatitude());
+		latitude2 = toRadians(gpspoint2.getLatitude());
+		longitude1 = toRadians(gpspoint1.getLongitude());
+		longitude2 = toRadians(gpspoint2.getLongitude());
 		latitudeSum = latitude2 - latitude1;
 		longitudeSum = longitude2 - longitude1;
 		
 		//Haversine-formlen
-		a = Math.pow(Math.sin(latitudeSum/2), 2) + (Math.cos(latitude1) * Math.cos(latitude2) * Math.pow(Math.sin(longitudeSum/2), 2)); 
-        c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		a = pow(sin(latitudeSum/2), 2) + (cos(latitude1) * cos(latitude2) * pow(sin(longitudeSum/2), 2)); 
+        c = 2*atan2(sqrt(a), sqrt(1-a));
         d = (R * c);
         
         return d;
@@ -97,7 +98,7 @@ public class GPSUtils {
 	
 	//Metode som finner gjennomsnitthastigheten i km/t mellom to GPS punkt
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
-
+	
 		double distance = distance(gpspoint1, gpspoint2);
 		int sec1 = gpspoint1.getTime();
 		int sec2 = gpspoint2.getTime();
@@ -113,6 +114,8 @@ public class GPSUtils {
 	//Metode som returnerer ein streng på formatet hh:mm:ss, der parameteren secs er sekunder fra midnatt. 
 	public static String formatTime(int secs) {
         
+		String TIMESEP = ":";
+		
 		int time = secs/3600;
 		int min = (secs%3600)/60;
 		int sek = (secs%3600)%60;
@@ -130,9 +133,8 @@ public class GPSUtils {
 			sekStr = nul + sekStr;
 		}
 		
-		String kolon = ":";
 		
-		String tidstr = "  " + timeStr + kolon + minStr + kolon + sekStr;
+		String tidstr = "  " + timeStr + TIMESEP + minStr + TIMESEP + sekStr;
 		
 		return tidstr;
 

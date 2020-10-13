@@ -58,7 +58,7 @@ public class ShowProfile extends EasyGraphics {
 			}
 			int y2 = ybase - y;
 			drawLine(x, ybase, x, y2);
-		    x= x + 3;
+		    x+= 3;
 		
 		}
 	}

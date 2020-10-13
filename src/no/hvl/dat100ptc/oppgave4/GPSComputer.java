@@ -1,9 +1,7 @@
 package no.hvl.dat100ptc.oppgave4;
 
-import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
-import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 
@@ -119,6 +117,9 @@ public class GPSComputer {
 			}		
 		double average = sumFart / sumTid;	
 		return average;
+		
+		//Forenklet versjon vist på presentasjon: return (totalDistance()/totalTime())*3.6
+		
 	}
 
 	/*
@@ -149,16 +150,16 @@ public class GPSComputer {
 		if(speedmph < 10) {
 			met = 4.0;
 		}
-		else if (speedmph >= 10 && speedmph < 12){
+		else if (speedmph < 12){
 			met = 6.0;
 		}
-        else if (speedmph >= 12 && speedmph < 14){
+        else if (speedmph < 14){
         	met = 8.0;
 		}
-        else if (speedmph >= 14 && speedmph < 16){
+        else if (speedmph < 16){
         	met = 10.0;
         }
-        else if (speedmph >= 16 && speedmph < 20){
+        else if (speedmph < 20){
         	met = 12.0;	
         }
         else if (speedmph >= 20){
@@ -174,22 +175,7 @@ public class GPSComputer {
 	//Metode som beregner den totale energi-mengden som blir forbrent på ruten
 	public double totalKcal(double weight) {
 
-		double totalkcal = 0 ;
-		
-		
-		//Finner tiden mellom to punkt og setter de inn i en tabell
-		int[] tabellTid = new int[gpspoints.length-1];	
-		for(int v = 1; v < gpspoints.length;v++) {
-			int tid1 = gpspoints[v-1].getTime();
-			int tid2 = gpspoints[v].getTime();
-			tabellTid[v-1] = tid2-tid1;
-		}
-		
-		double[]tabSpeed= speeds();				
-		for(int v = 0; v < tabellTid.length;v++) {
-			totalkcal = totalkcal + this.kcal(weight, tabellTid[v], tabSpeed[v]);
-		}
-		return totalkcal;
+		return this.kcal(weight, totalTime(), averageSpeed());
 		
 	}
 	
